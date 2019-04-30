@@ -4,6 +4,8 @@
  * 写一个贼特么好看的登录页面
  */
 import 'dart:convert' show json;
+import 'package:ath_app/common/model/logininfo.dart';
+import 'package:ath_app/page_constance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -13,7 +15,7 @@ import 'package:ath_app/common/http/response/respObj.dart';
 import 'package:ath_app/common/messageAlter.dart';
 import 'package:ath_app/common/messageDialog.dart';
 import 'package:ath_app/common/model/userInfo.dart';
-import 'package:ath_app/common/str_util.dart';
+import 'package:ath_app/common/utils/str_util.dart';
 import 'package:ath_app/page/register_page.dart';
 class LoginPage extends StatefulWidget {
   @override
@@ -227,8 +229,9 @@ class _LoginPageState extends State<LoginPage> {
             if (_formKey.currentState.validate()) {
               ///只有输入的内容符合要求通过才会到达此处
               _formKey.currentState.save();
-              //TODO 执行登录方法
-              UserInfo userInfo = new UserInfo(0,'','','$_password','$_phoneNum','');
+              UserInfo userInfo = new UserInfo.empty();
+              userInfo.userPhone='$_phoneNum';
+              userInfo.userPwd='$_password';
               print('email:$_phoneNum , assword:$_password');
              // json.
               HttpUtils.post(Api.USER_LOGIN,ssucce,context,params: json.decode(json.encode(userInfo)),errorCallBack: fail2);
@@ -239,9 +242,23 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  _goHomePage() {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        PageConstance.HOME_PAGE, (Route<dynamic> route) => false);
+  }
   void ssucce(RespObj data){
     UserInfo user = UserInfo.fromJson(data.data);
-    print(data);
+   // Navigator.of(context).pop();
+    LoginInfo.id = user.id;
+    LoginInfo.userName = user.userName;
+    LoginInfo.userCode = user.userCode;
+    LoginInfo.faceImage = user.faceImage;
+    LoginInfo.userEmail = user.userEmail;
+    LoginInfo.userPhone = user.userPhone;
+    LoginInfo.faceImageBig = user.faceImageBig;
+    LoginInfo.isLogin=true;
+    LoginInfo.loginTime = new DateTime.now();
+    _goHomePage();
   }
   void fail2(RespObj data){
     if(data.code=="U001"){

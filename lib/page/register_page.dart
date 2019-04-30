@@ -6,7 +6,7 @@ import 'package:ath_app/common/http/response/respObj.dart';
 import 'package:ath_app/common/ShareDataWidget.dart';
 import 'package:ath_app/common/messageAlter.dart';
 import 'package:ath_app/common/model/userInfo.dart';
-import 'package:ath_app/common/str_util.dart';
+import 'package:ath_app/common/utils/str_util.dart';
 import 'package:ath_app/common/verifyCodeBtn.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -212,13 +212,15 @@ class _CreateRegisterPage extends State<_CreatePage> {
       _errorVerCode="";
       _errorVerCode="";
     }
-    UserInfo userInfo = new UserInfo(0,'','','11111','$_phoneNum','');
+    UserInfo userInfo = new UserInfo.empty();
+    userInfo.userPhone=_phoneNum;
+    userInfo.userPwd='11111';
     print('phoneNum:$_phoneNum');
     HttpUtils.post(Api.REGISTER,ssucce,context,params: userInfo.toJson(),errorCallBack: fail);
   }
   void ssucce(RespObj data){
     Alter.show(_globalKey.currentContext,"注册成功");
-
+    Navigator.of(context).pop();
   }
   void fail(RespObj data){
     Alter.show(_globalKey.currentContext, data.message);
