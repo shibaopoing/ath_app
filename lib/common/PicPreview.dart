@@ -27,28 +27,23 @@ class _MyBoxPageState extends State<PicPreview> {
   bool  setFace = false;
   //裁剪后的的头像文件
   File cropFile;
+  String imgPath;
   @override
-
   void initState() {
-
     // TODO: implement initState
-
     super.initState();
-
+    setState(() {
+      imgPath=Api.ImageUrl+LoginInfo.faceImageBig;
+    });
     //loadData();
-
   }
-
   @override
 
   Widget build(BuildContext context) {
-
     width = MediaQuery.of(context).size.width;
     height =MediaQuery.of(context).size.height;
     return Container(
-
       child: getListView(),
-
     );
   }
   getListView(){
@@ -75,7 +70,7 @@ class _MyBoxPageState extends State<PicPreview> {
     return Container(
       child:
       fcache.FadeInImage.memoryNetwork(
-        image:Api.ImageUrl+LoginInfo.faceImageBig,
+        image:imgPath,
         sdcache: true,
         placeholder: kTransparentImage,
         width: width,
@@ -122,6 +117,22 @@ class _MyBoxPageState extends State<PicPreview> {
               ),
               new ListTile(
                 enabled: setFace,
+                leading: new Icon(Icons.cancel),
+                title: new Text("撤销"),
+                onTap: () async {
+                  setState(() {
+                    imgPath=Api.ImageUrl+LoginInfo.faceImageBig;
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+              new Container(
+                margin: new EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
+                height: 1.0,
+                color: const Color(0xffebebeb),
+              ),
+              new ListTile(
+                enabled: setFace,
                 leading: new Icon(Icons.face),
                 title: new Text("设为头像"),
                 onTap: () async {
@@ -131,28 +142,30 @@ class _MyBoxPageState extends State<PicPreview> {
                   }
                 },
               ),
+
             ],
           );
         }
     );
   }
   _saveImageLocal()async{
-    await ImageUtil.saveImage(Api.ImageUrl+LoginInfo.faceImageBig,Api.ImageUrl+LoginInfo.faceImageBig);
+    await ImageUtil.saveImage(imgPath,imgPath);
     Alter.show(context, "保存成功");
   }
   _cropImage()async{
     //从手机中获取图片路径
-    String imagePth = await ImageUtil.getImagePathFromSd(Api.ImageUrl+LoginInfo.faceImageBig);
+    String imagePth = await ImageUtil.getImagePathFromSd(imgPath);
     var file = File(imagePth);
     bool exist =  await file.exists();
     if(!exist) {
-      imagePth =await ImageUtil.saveImage(Api.ImageUrl+LoginInfo.faceImageBig,Api.ImageUrl+LoginInfo.faceImageBig);
+      imagePth =await ImageUtil.saveImage(imgPath,imgPath);
     }
-    var image = await ImageUtil.cropImage(imagePth);
+    File image = await ImageUtil.cropImage(imagePth);
     if (image != null) {
       setState(() {
         cropFile = image;
         setFace = true;
+        imgPath = image.path;
       });
     }
   }

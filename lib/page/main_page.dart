@@ -10,7 +10,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
   static GlobalKey<ScaffoldState> _globalKey= new GlobalKey();
   TabController _tabController; //需要定义一个Controller
-  List tabs = ["新闻", "历史", "图片"];
+  List tabs = ["电影", "电视剧", "动漫"];
   @override
   void initState() {
     super.initState();

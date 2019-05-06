@@ -23,9 +23,11 @@ class MyPage extends StatefulWidget{
 class _MyPageState extends State<MyPage>{
   _MyPageState({Key key, this.title});
   final String title;
+  static GlobalKey<ScaffoldState> _globalKey= new GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: _globalKey,
       child: MediaQuery.removePadding(
         context: context,
         // DrawerHeader consumes top MediaQuery padding.
@@ -44,33 +46,42 @@ class _MyPageState extends State<MyPage>{
                       child:new Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: ClipOval(
-clipBehavior: Clip.hardEdge,
-                          child:LoginInfo.faceImage != null ? Image.network(Api.ImageUrl+LoginInfo.faceImage,width: 80,fit: BoxFit.cover,) : Image.asset("pic/images/avatar.png", width: 80,fit: BoxFit.cover),
+                          clipBehavior: Clip.hardEdge,
+                          child:LoginInfo.faceImage != null ? Image.network(Api.ImageUrl+LoginInfo.faceImage,width: 64,fit: BoxFit.cover,) : Image.asset("pic/images/avatar.png", width: 64,fit: BoxFit.cover),
                         ),
                       )
                     ),
-                    new Expanded(
+                    new Container(
                       child: GestureDetector(
                           onTap: () {
                             print("姓名、电话");
                           },
                         child: new Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 0),
-                            child: new ListTile(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                              title: new Text(
+                           // margin: const EdgeInsets.only(top:10),
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                              new Text(
                                 LoginInfo.userName!= null?LoginInfo.userName:"未登录",
                                 style: new TextStyle(
                                     color: const Color(0xff353535), fontSize: 20.0,fontWeight: FontWeight.bold),
                               ),
-
-                              subtitle: new Text(LoginInfo.userCode!= null?LoginInfo.userCode:"",
-                                  style: new TextStyle(
-                                      color: const Color(0xffaaaaaa), fontSize: 14.0
-                                  )
+                              new Container(
+                                height: 25,
+                                //color: Color(0xff353535),
+                                margin: const EdgeInsets.only(top: 0),
+                                child: new Row(
+                                  children: <Widget>[
+                                    new Text(
+                                        LoginInfo.userCode!= null?LoginInfo.userCode:"",
+                                        style: new TextStyle(
+                                            color: const Color(0xffaaaaaa), fontSize: 14.0)
+                                    ),
+                                  ],
+                                ),
                               ),
-                              trailing: new Icon(Icons.keyboard_arrow_right),
-                            ),
+                            ],
+                          )
                         )
                       ),
                     ),
@@ -78,25 +89,88 @@ clipBehavior: Clip.hardEdge,
                 ),
               ),
               new Container(
-                margin: new EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 0.0),
-                height: 1.0,
+                margin: EdgeInsets.only(top: 30),
                 color: const Color(0xffebebeb),
+                height:40.0,
+                padding: const EdgeInsets.fromLTRB(0.0,10.0,0.0,10.0),
+                child: new FractionallySizedBox(
+                  alignment: Alignment.bottomCenter,
+                  widthFactor: 1,
+                  heightFactor: 2.5,
+                  child: new Card(
+                    //color: Colors.red,
+                    child: new Row(
+                      children: <Widget>[
+                        new Container(
+                            margin: new EdgeInsets.only(left: 20),
+                            child:new GestureDetector(
+                              onTap: (){
+                                print("获取影币");
+                              },
+                              child: new Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text(
+                                    '影币:',
+                                    style: new TextStyle(
+                                        color: const Color(0xff353535),fontStyle: FontStyle.normal),
+                                  ),
+                                  new Text(
+                                    '300',
+                                    style: new TextStyle(
+                                        color: const Color(0xff353535),fontStyle: FontStyle.normal),
+                                  ),
+                                  new Padding(
+                                    padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                                    child: new Image.asset("pic/images/money-gold.png", width: 20.0, height: 20.0,semanticLabel: "影豆",),
+                                  ),
+                                ],
+                              ),
+                            )
+                        ),
+                        new Container(
+                            margin: new EdgeInsets.only(left:MediaQuery.of(context).size.width-200.0),
+                             // padding: EdgeInsets.only(right: 20),
+                            child:new GestureDetector(
+                              onTap: (){
+                                print("签到");
+                              },
+                              child: new Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text(
+                                    '签到',
+                                    style: new TextStyle(
+                                        color: const Color(0xff353535), fontStyle: FontStyle.normal),
+                                  ),
+                                  new Padding(
+                                    padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                                    child:new Icon(Icons.calendar_today,color: Colors.amber,size:20 ,),
+                                   // child: new Image.asset("pic/images/money-gold.png", width: 24.0, height: 24.0,semanticLabel: "影豆",),
+                                  ),
+                                ],
+                              ),
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 child: ListView(
                   children: <Widget>[
                     ListTile(
-                      leading: const Icon(Icons.add),
-                      title: const Text('Add account'),
+                      leading: const Icon(Icons.payment),
+                      title: const Text('支付'),
                     ),
                     new Container(
-                      margin: new EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
-                       height: 1.0,
+                      height: 20.0,
                       color: const Color(0xffebebeb),
                     ),
                     ListTile(
-                      leading: const Icon(Icons.settings),
-                      title: const Text('Manage accounts'),
+                      leading: const Icon(Icons.center_focus_strong),
+                      title: const Text('关注'),
                     ),
                     new Container(
                       margin: new EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
@@ -104,10 +178,31 @@ clipBehavior: Clip.hardEdge,
                       color: const Color(0xffebebeb),
                     ),
                     ListTile(
-                      leading: const Icon(Icons.assignment_return),
-                      title: const Text('退出'),
-                      onTap:_pushLogOut,
+                      leading: const Icon(Icons.notifications_active),
+                      title: const Text('通知'),
                     ),
+                    new Container(
+                      margin: new EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
+                       height: 1.0,
+                      color: const Color(0xffebebeb),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.help),
+                      title: const Text('反馈与帮助'),
+                    ),
+                    new Container(
+                      height: 20.0,
+                      color: const Color(0xffebebeb),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.settings),
+                      title: const Text('设置'),
+                    ),
+                    new Container(
+                      height: 20.0,
+                      color: const Color(0xffebebeb),
+                    ),
+                    buildRegisterBtn(context),
                   ],
                 ),
               ),
@@ -116,7 +211,23 @@ clipBehavior: Clip.hardEdge,
       ),
     );
   }
-
+  Padding buildRegisterBtn(context) {
+    return new Padding(
+      padding: const EdgeInsets.only(left: 40.0, right: 40.0, top: 20.0),
+      child: new RaisedButton(
+        color: Colors.red,
+        textColor: Colors.white,
+        disabledColor: Colors.blue[100],
+        onPressed:() {
+          _pushLogOut();
+        },
+        child: new Text(
+          "退出",
+          style: new TextStyle(fontSize: 16.0),
+        ),
+      ),
+    );
+  }
   void _modalBottomSheetMenu(){
     showModalBottomSheet(
         context: context,
@@ -181,18 +292,19 @@ clipBehavior: Clip.hardEdge,
     );
   }
   void _pushLogOut() {
-    setState(() {
-      LoginInfo.id = 0;
-      LoginInfo.hasInit=false;
-      LoginInfo.userName = "未登录";
-      LoginInfo.userCode = "";
-      LoginInfo.faceImage =null;
-      LoginInfo.userEmail = "";
-      LoginInfo.userPhone = "";
-      LoginInfo.isLogin=false;
-      LoginInfo.loginTime = null;
-    });
-
+    if(LoginInfo.hasInit){
+      setState(() {
+        LoginInfo.id = 0;
+        LoginInfo.hasInit=false;
+        LoginInfo.userName = "未登录";
+        LoginInfo.userCode = "";
+        LoginInfo.faceImage =null;
+        LoginInfo.userEmail = "";
+        LoginInfo.userPhone = "";
+        LoginInfo.isLogin=false;
+        LoginInfo.loginTime = null;
+      });
+    }
   }
   void _showIamgeView(){
     Navigator.of(context).push(

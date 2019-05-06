@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage>{
   _openNewPage() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
-      return EachView(title:"new Pager");
+      return EachView(title:"填写您的愿望单");
     }));
   }
   @override

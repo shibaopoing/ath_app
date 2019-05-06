@@ -44,9 +44,14 @@ class ImageUtil{
 
   }
   static Future<String> getImagePathFromSd(String name)async{
-    name = md5.convert(convert.utf8.encode(name)).toString();
-    Directory dir = await getTemporaryDirectory();
-    return dir.path +"/"+name;
+    if(name.toUpperCase().endsWith("JPG")||name.toUpperCase().endsWith("PNG")){
+      return name;
+    }else{
+      name = md5.convert(convert.utf8.encode(name)).toString();
+      Directory dir = await getTemporaryDirectory();
+      return dir.path +"/"+name;
+    }
+
   }
   static Future<Uint8List> getFromSdcard(String name) async{
     String path =await getImagePathFromSd(name);
