@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 // ignore: must_be_immutable
 class MessageDialog extends Dialog {
   String title;
@@ -54,9 +55,9 @@ class MessageDialog extends Dialog {
                           ),
                         ),
                         new GestureDetector(
-                          onTap:(){
+                          onTap: () {
                             Navigator.pop(context); //关闭对话框
-                            if(onCloseEvent!=null){
+                            if (onCloseEvent != null) {
                               onCloseEvent();
                             }
                           },
@@ -99,8 +100,10 @@ class MessageDialog extends Dialog {
 
   Widget _buildBottomButtonGroup(context) {
     var widgets = <Widget>[];
-    if (negativeText != null && negativeText.isNotEmpty) widgets.add(_buildBottomCancelButton(context));
-    if (positiveText != null && positiveText.isNotEmpty) widgets.add(_buildBottomPositiveButton(context));
+    if (negativeText != null && negativeText.isNotEmpty)
+      widgets.add(_buildBottomCancelButton(context));
+    if (positiveText != null && positiveText.isNotEmpty)
+      widgets.add(_buildBottomPositiveButton(context));
     return new Flex(
       direction: Axis.horizontal,
       children: widgets,
@@ -111,9 +114,9 @@ class MessageDialog extends Dialog {
     return new Flexible(
       fit: FlexFit.tight,
       child: new FlatButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context); //关闭对话框
-          if(onCloseEvent!=null){
+          if (onCloseEvent != null) {
             onCloseEvent();
           }
         },
@@ -131,9 +134,9 @@ class MessageDialog extends Dialog {
     return new Flexible(
       fit: FlexFit.tight,
       child: new FlatButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context); //关闭对话框
-          if(onPositivePressEvent!=null){
+          if (onPositivePressEvent != null) {
             onPositivePressEvent();
           }
         },

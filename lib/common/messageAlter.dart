@@ -1,8 +1,8 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
-class Alter{
 
-  static Future show(BuildContext context,String msg){
+class Alter {
+  static Future show(BuildContext context, String msg) {
     Fluttertoast.showToast(
       msg: msg,
       gravity: ToastGravity.CENTER,

@@ -134,7 +134,6 @@ class _CreateRegisterPage extends State<_CreatePage> {
   Widget buildVerifyCodeTextField(BuildContext context) {
     var node = new FocusNode();
     Widget verifyCodeEdit = new TextField(
-
       focusNode: focusNode2,//关联focusNode2
       onChanged: (str) {
         setState(() {

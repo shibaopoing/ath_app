@@ -113,9 +113,9 @@ class _SkipDownTimeProgressState extends State<SkipDownTimeProgress>
 
   void _doAnimation() async {
     Future.delayed(new Duration(milliseconds: 50), () {
-      if(mounted) {
+      if (mounted) {
         animationController.forward().orCancel;
-      }else {
+      } else {
         _doAnimation();
       }
     });

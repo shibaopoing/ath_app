@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -9,22 +8,24 @@ import 'package:ath_app/common/http/response/respObj.dart';
 import 'package:ath_app/common/messageAlter.dart';
 import 'package:ath_app/common/model/smsCodeDto.dart';
 import 'package:ath_app/common/utils/str_util.dart';
-class  CreateVerifyCodeBtn  extends StatefulWidget {
+
+class CreateVerifyCodeBtn extends StatefulWidget {
   @override
-  State<CreateVerifyCodeBtn> createState()=>CreateBtn();
+  State<CreateVerifyCodeBtn> createState() => CreateBtn();
 }
 
-class CreateBtn extends State<CreateVerifyCodeBtn>{
-  static GlobalKey<ScaffoldState> _globalKey= new GlobalKey();
-  int _seconds=0;
+class CreateBtn extends State<CreateVerifyCodeBtn> {
+  static GlobalKey<ScaffoldState> _globalKey = new GlobalKey();
+  int _seconds = 0;
   String _verifyStr = "获取验证码";
   Timer _timer;
 
   @override
   void initState() {
     super.initState();
-    _seconds=0;
+    _seconds = 0;
   }
+
   @override
   Widget build(BuildContext context) {
     //ShareDataWidget shareDataWidget = ShareDataWidget.of(context);
@@ -33,18 +34,20 @@ class CreateBtn extends State<CreateVerifyCodeBtn>{
       key: _globalKey,
       onTap: (_seconds == 0)
           ? () {
-        setState(() {
-          String sPhoneNum = myWidget.data;
-          if(StringUtil.isPhoneNum(sPhoneNum)){
-            SmsCodeDto smsCode = new SmsCodeDto('$sPhoneNum','00');
-            print('phoneNum:$sPhoneNum');
-            HttpUtils.post(Api.SEND_SMS_CODE,ssucce,context,params: smsCode.toJson(),errorCallBack: fail2);
-          }else{
-            Alter.show(context,"请输入正确的手机号");
-            return;
-          }
-        });
-      }: null,
+              setState(() {
+                String sPhoneNum = myWidget.data;
+                if (StringUtil.isPhoneNum(sPhoneNum)) {
+                  SmsCodeDto smsCode = new SmsCodeDto('$sPhoneNum', '00');
+                  print('phoneNum:$sPhoneNum');
+                  HttpUtils.post(Api.SEND_SMS_CODE, ssucce, context,
+                      params: smsCode.toJson(), errorCallBack: fail2);
+                } else {
+                  Alter.show(context, "请输入正确的手机号");
+                  return;
+                }
+              });
+            }
+          : null,
       child: new Container(
         alignment: Alignment.center,
         width: 100.0,
@@ -62,6 +65,7 @@ class CreateBtn extends State<CreateVerifyCodeBtn>{
       ),
     );
   }
+
   _startTimer() {
     _seconds = 10;
     _timer = new Timer.periodic(new Duration(seconds: 1), (timer) {
@@ -77,14 +81,17 @@ class CreateBtn extends State<CreateVerifyCodeBtn>{
       }
     });
   }
+
   _cancelTimer() {
     _timer?.cancel();
   }
-  void ssucce(RespObj data){
-    Alter.show(_globalKey.currentContext,"短信已发送");
+
+  void ssucce(RespObj data) {
+    Alter.show(_globalKey.currentContext, "短信已发送");
     _startTimer();
   }
-  void fail2(RespObj data){
+
+  void fail2(RespObj data) {
     Alter.show(_globalKey.currentContext, data.message);
   }
 }

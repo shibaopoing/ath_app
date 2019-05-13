@@ -15,15 +15,15 @@ class NetLoadingDialog extends StatefulWidget {
   BuildContext context;
   NetLoadingDialog(
       {Key key,
-        this.loadingText = "loading...",
-        this.outsideDismiss = true,
-        this.url,
-        this.method,
-        this.params,
-        this.callBack,
-        this.errorCallBack,
-        this.dismissCallback,
-        this.context})
+      this.loadingText = "loading...",
+      this.outsideDismiss = true,
+      this.url,
+      this.method,
+      this.params,
+      this.callBack,
+      this.errorCallBack,
+      this.dismissCallback,
+      this.context})
       : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class NetLoadingDialog extends StatefulWidget {
 }
 
 class _LoadingDialog extends State<NetLoadingDialog> {
-  static GlobalKey<ScaffoldState> _globalKey= new GlobalKey();
+  static GlobalKey<ScaffoldState> _globalKey = new GlobalKey();
   _dismissDialog() {
     if (widget.dismissCallback != null) {
       widget.dismissCallback();
@@ -42,10 +42,13 @@ class _LoadingDialog extends State<NetLoadingDialog> {
   @override
   void initState() {
     super.initState();
-    DioUtil.post(widget.url,widget.params,widget.callBack,widget.errorCallBack,widget.context).then((_){
-     // Navigator.of(_globalKey.currentContext).pop(); 当返回信息被其他context处理后，此段代码失效
+    DioUtil.post(widget.url, widget.params, widget.callBack,
+            widget.errorCallBack, widget.context)
+        .then((_) {
+      // Navigator.of(_globalKey.currentContext).pop(); 当返回信息被其他context处理后，此段代码失效
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(

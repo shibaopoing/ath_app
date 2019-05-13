@@ -7,13 +7,13 @@ class RespObj extends BaseRsp<Map> {
   }
 
   factory RespObj.fromJson(Map<String, dynamic> json) {
-    return RespObj(json['success'], json['code'], json['message'],
-        json['data']);
+    return RespObj(
+        json['success'], json['code'], json['message'], json['data']);
   }
   Map<String, dynamic> toJson() => <String, dynamic>{
-    'success': this.success,
-    'code': this.code,
-    'message': this.message,
-    'data': this.data
-  };
+        'success': this.success,
+        'code': this.code,
+        'message': this.message,
+        'data': this.data
+      };
 }

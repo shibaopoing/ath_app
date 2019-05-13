@@ -5,25 +5,30 @@ import 'package:ath_app/common/utils/ImageUtil.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 class MyNetworkImage extends ImageProvider<MyNetworkImage> {
   /// Creates an object that fetches the image at the given URL.
   ///
   /// The arguments must not be null.
-  const MyNetworkImage(this.url, { this.scale = 1.0 , this.headers,this.sdCache })
+  const MyNetworkImage(this.url, {this.scale = 1.0, this.headers, this.sdCache})
       : assert(url != null),
         assert(scale != null);
+
   /// The URL from which the image will be fetched.
   final String url;
 
   final bool sdCache;
+
   /// The scale to place in the [ImageInfo] object of the image.
   final double scale;
+
   /// The HTTP headers that will be used with [HttpClient.get] to fetch image from network.
   final Map<String, String> headers;
   @override
   Future<MyNetworkImage> obtainKey(ImageConfiguration configuration) {
     return SynchronousFuture<MyNetworkImage>(this);
   }
+
   @override
   ImageStreamCompleter load(MyNetworkImage key) {
     return MultiFrameImageStreamCompleter(
@@ -32,13 +37,15 @@ class MyNetworkImage extends ImageProvider<MyNetworkImage> {
         informationCollector: (StringBuffer information) {
           information.writeln('Image provider: $this');
           information.write('Image key: $key');
-        }
-    );
+        });
   }
+
   Future<Codec> _loadAsync(MyNetworkImage key) async {
     assert(key == this);
-    final Uint8List bytes =await ImageUtil.loadAsync(key.url);
-    if (bytes!=null&&bytes.lengthInBytes!=null&&bytes.lengthInBytes!= 0) {
+    final Uint8List bytes = await ImageUtil.loadAsync(key.url);
+    if (bytes != null &&
+        bytes.lengthInBytes != null &&
+        bytes.lengthInBytes != 0) {
       print("success");
       return await PaintingBinding.instance.instantiateImageCodec(bytes);
     }
@@ -61,14 +68,14 @@ class MyNetworkImage extends ImageProvider<MyNetworkImage> {
     }
     */
   }
+
   @override
   bool operator ==(dynamic other) {
-    if (other.runtimeType != runtimeType)
-      return false;
+    if (other.runtimeType != runtimeType) return false;
     final MyNetworkImage typedOther = other;
-    return url == typedOther.url
-        && scale == typedOther.scale;
+    return url == typedOther.url && scale == typedOther.scale;
   }
+
   @override
   int get hashCode => hashValues(url, scale);
   @override

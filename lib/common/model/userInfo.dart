@@ -1,4 +1,4 @@
-class UserInfo{
+class UserInfo {
   num _id;
   String _userCode;
   String _userName;
@@ -12,24 +12,23 @@ class UserInfo{
       this._userPhone, this._userEmail, this._faceImage, this._faceImageBig);
 
   UserInfo.fromJson(Map<String, dynamic> json)
-      : _id=json['id'] as num,
+      : _id = json['id'] as num,
         _userName = json['userName'],
         _userCode = json['userCode'],
         _userPwd = json['userPwd'],
-        _userPhone =json['userPhone'],
+        _userPhone = json['userPhone'],
         _userEmail = json['userEmail'],
         _faceImage = json['faceImage'],
         _faceImageBig = json['faceImageBig'];
-  Map<String, dynamic> toJson() =>
-      {
-        'id':_id ,
+  Map<String, dynamic> toJson() => {
+        'id': _id,
         'userName': _userName,
-        'userCode':_userCode,
-        'userPwd':_userPwd,
-        'userPhone':_userPhone,
-        'userEmail':_userEmail,
-        'faceImage':_faceImage,
-        'faceImageBig':_faceImageBig,
+        'userCode': _userCode,
+        'userPwd': _userPwd,
+        'userPhone': _userPhone,
+        'userEmail': _userEmail,
+        'faceImage': _faceImage,
+        'faceImageBig': _faceImageBig,
       };
 
   String get faceImageBig => _faceImageBig;
@@ -79,5 +78,4 @@ class UserInfo{
   set id(num value) {
     _id = value;
   }
-
 }

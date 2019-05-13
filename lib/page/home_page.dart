@@ -1,3 +1,6 @@
+import 'package:ath_app/common/text_style.dart';
+import 'package:ath_app/page/demoChip.dart';
+import 'package:ath_app/page/mine_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ath_app/page/main_page.dart';
@@ -13,13 +16,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>{
   List<Widget> _viewList; //创建视图数组
   int _index = 0; //数组索引，通过改变索引值改变视图
+  static const double _iconSize = 30;
+  static const int selectedColor =0xFF2962FF;
+  static const int normalColor =0xFF212121;
+  List<int> _itemsColor;
   @override
   void initState() {
     super.initState();
     // 创建Controller
     _viewList = List();
-    _viewList..add(MainPage())..add(MainPage())..add(MainPage())..add( MyPage());
-
+    _viewList..add(MainPage())..add(ChipDemo())..add(MinePage())..add( MinePage());
+    _itemsColor = List();
+    _itemsColor..add(selectedColor)..add(normalColor)..add(normalColor)..add(normalColor);
   }
   _openNewPage() {
     Navigator.of(context)
@@ -32,41 +40,46 @@ class _MyHomePageState extends State<MyHomePage>{
     return new Scaffold(
       body:_viewList[_index],
       floatingActionButton: FloatingActionButton( //悬浮按钮
-          child: Icon(Icons.add),
+          backgroundColor: Style.cardColor,
+          child: Icon(Icons.add,color:Style.iconColor),
           onPressed:_openNewPage
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
         shape: CircularNotchedRectangle(), // 底部导航栏打一个圆形的洞
+        color: Style.iconColor,
         child: Row(
           children: <Widget>[
-            IconButton(icon: Icon(Icons.home),
+            IconButton(icon: Icon(Icons.home,color: Color(_itemsColor[0]),size:_iconSize),
               onPressed: () {
                 setState(() {
                   _index = 0;
                 });
+                _setSelectedItemsColor(_index);
               },
             ),
-            IconButton(icon: Icon(Icons.trip_origin),
+            IconButton(icon: Icon(Icons.trip_origin,color: Color(_itemsColor[1]),size:_iconSize),
               onPressed: () {
                 setState(() {
                   _index = 1;
                 });
+                _setSelectedItemsColor(_index);
               },
             ),
             SizedBox(), //中间位置空出
-            IconButton(icon: Icon(Icons.grade),
+            IconButton(icon: Icon(Icons.grade,color: Color(_itemsColor[2]),size:_iconSize),
               onPressed: () {
                 setState(() {
                   _index = 2;
                 });
+                _setSelectedItemsColor(_index);
               },
             ),
-            IconButton(icon: Icon(Icons.account_circle),
+            IconButton(icon: Icon(Icons.account_box,color: Color(_itemsColor[3]),size:_iconSize),
               onPressed: () {
                 setState(() {
                   _index = 3;
                 });
+                _setSelectedItemsColor(_index);
               },
             ),
           ],
@@ -74,7 +87,22 @@ class _MyHomePageState extends State<MyHomePage>{
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      backgroundColor:Style.iconColor ,
     );
+  }
+  _setSelectedItemsColor(int index){
+    //遍历每个元素  此时不可add或remove  否则报错 但可以修改元素值，
+    for(int i=0;i<_itemsColor.length;i++){
+      if(i==index){
+        setState(() {
+          _itemsColor[i]=selectedColor;
+        });
+      }else{
+        setState(() {
+          _itemsColor[i]=normalColor;
+        });
+      }
+    }
   }
 }
 //子页面

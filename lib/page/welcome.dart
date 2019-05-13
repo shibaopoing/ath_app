@@ -72,7 +72,7 @@ class _WelcomePageState extends State<WelcomePage>
           ),
           constraints: new BoxConstraints.expand(),
         ),
-        new Image.asset('pic/images/wenshan_wel_logon.jpg',fit: BoxFit.fitWidth),
+        new Image.asset('assets/images/wenshan_wel_logon.jpg',fit: BoxFit.fitWidth),
         new Container(
           child: Align(
             alignment: Alignment.topRight,

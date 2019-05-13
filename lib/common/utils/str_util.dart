@@ -24,8 +24,8 @@ class StringUtil {
     return path;
   }
 
-  static bool isPhoneNum(String phoneNum){
-    if(phoneNum.isEmpty){
+  static bool isPhoneNum(String phoneNum) {
+    if (phoneNum.isEmpty) {
       return false;
     }
     var pheoneReg = RegExp(

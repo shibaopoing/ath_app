@@ -14,8 +14,6 @@ import 'package:flutter/material.dart';
 
 // Uint8List bytes;
 
-
-
 /// An image that shows a [placeholder] image while the target [image] is
 
 /// loading, then fades in the new image when it loads.
@@ -105,7 +103,6 @@ import 'package:flutter/material.dart';
 /// {@end-tool}
 
 class FadeInImage extends StatefulWidget {
-
   /// Creates a widget that displays a [placeholder] while an [image] is loading
 
   /// then cross-fades to display the [image].
@@ -119,56 +116,30 @@ class FadeInImage extends StatefulWidget {
   /// [matchTextDirection] arguments must not be null.
 
   const FadeInImage({
-
     Key key,
-
     @required this.placeholder,
-
     @required this.image,
-
     this.fadeOutDuration = const Duration(milliseconds: 300),
-
     this.fadeOutCurve = Curves.easeOut,
-
     this.fadeInDuration = const Duration(milliseconds: 700),
-
     this.fadeInCurve = Curves.easeIn,
-
     this.width,
-
     this.height,
-
     this.fit,
-
     this.sdcache,
-
     this.alignment = Alignment.center,
-
     this.repeat = ImageRepeat.noRepeat,
-
     this.matchTextDirection = false,
-
-  }) : assert(placeholder != null),
-
+  })  : assert(placeholder != null),
         assert(image != null),
-
         assert(fadeOutDuration != null),
-
         assert(fadeOutCurve != null),
-
         assert(fadeInDuration != null),
-
         assert(fadeInCurve != null),
-
         assert(alignment != null),
-
         assert(repeat != null),
-
         assert(matchTextDirection != null),
-
         super(key: key);
-
-
 
   /// Creates a widget that uses a placeholder image stored in memory while
 
@@ -213,68 +184,36 @@ class FadeInImage extends StatefulWidget {
   ///    the network.
 
   FadeInImage.memoryNetwork({
-
     Key key,
-
     @required Uint8List placeholder,
-
     @required String image,
-
     double placeholderScale = 1.0,
-
     double imageScale = 1.0,
-
     this.fadeOutDuration = const Duration(milliseconds: 100),
-
     this.fadeOutCurve = Curves.easeOut,
-
     this.fadeInDuration = const Duration(milliseconds: 100),
-
     this.fadeInCurve = Curves.easeIn,
-
     this.width,
-
     this.height,
-
     this.fit,
-
     this.alignment = Alignment.center,
-
     this.repeat = ImageRepeat.noRepeat,
-
     this.matchTextDirection = false,
-
-    this.sdcache =false,
-
-  }) : assert(placeholder != null),
-
+    this.sdcache = false,
+  })  : assert(placeholder != null),
         assert(image != null),
-
         assert(placeholderScale != null),
-
         assert(imageScale != null),
-
         assert(fadeOutDuration != null),
-
         assert(fadeOutCurve != null),
-
         assert(fadeInDuration != null),
-
         assert(fadeInCurve != null),
-
         assert(alignment != null),
-
         assert(repeat != null),
-
         assert(matchTextDirection != null),
-
         placeholder = MemoryImage(placeholder, scale: placeholderScale),
-
-        image = MyNetworkImage(image, scale: imageScale,sdCache: sdcache),
-
+        image = MyNetworkImage(image, scale: imageScale, sdCache: sdcache),
         super(key: key);
-
-
 
   /// Creates a widget that uses a placeholder image stored in an asset bundle
 
@@ -325,108 +264,63 @@ class FadeInImage extends StatefulWidget {
   ///    the network.
 
   FadeInImage.assetNetwork({
-
     Key key,
-
     @required String placeholder,
-
     @required String image,
-
     AssetBundle bundle,
-
     double placeholderScale,
-
     double imageScale = 1.0,
-
     this.fadeOutDuration = const Duration(milliseconds: 300),
-
     this.fadeOutCurve = Curves.easeOut,
-
     this.fadeInDuration = const Duration(milliseconds: 700),
-
     this.fadeInCurve = Curves.easeIn,
-
     this.width,
-
     this.height,
-
     this.fit,
-
     this.sdcache,
-
     this.alignment = Alignment.center,
-
     this.repeat = ImageRepeat.noRepeat,
-
     this.matchTextDirection = false,
-
-  }) : assert(placeholder != null),
-
+  })  : assert(placeholder != null),
         assert(image != null),
-
         placeholder = placeholderScale != null
-
-            ? ExactAssetImage(placeholder, bundle: bundle, scale: placeholderScale)
-
+            ? ExactAssetImage(placeholder,
+                bundle: bundle, scale: placeholderScale)
             : AssetImage(placeholder, bundle: bundle),
-
         assert(imageScale != null),
-
         assert(fadeOutDuration != null),
-
         assert(fadeOutCurve != null),
-
         assert(fadeInDuration != null),
-
         assert(fadeInCurve != null),
-
         assert(alignment != null),
-
         assert(repeat != null),
-
         assert(matchTextDirection != null),
-
-        image = MyNetworkImage(image, scale: imageScale,sdCache: sdcache),
-
+        image = MyNetworkImage(image, scale: imageScale, sdCache: sdcache),
         super(key: key);
-
-
 
   /// Image displayed while the target [image] is loading.
 
   final ImageProvider placeholder;
 
-
-
   /// The target image that is displayed.
 
   final ImageProvider image;
-
-
 
   /// The duration of the fade-out animation for the [placeholder].
 
   final Duration fadeOutDuration;
 
-
-
   /// The curve of the fade-out animation for the [placeholder].
 
   final Curve fadeOutCurve;
-
-
 
   /// The duration of the fade-in animation for the [image].
 
   final Duration fadeInDuration;
 
-
-
   /// The curve of the fade-in animation for the [image].
 
   final Curve fadeInCurve;
-
-
 
   /// If non-null, require the image to have this width.
 
@@ -442,8 +336,6 @@ class FadeInImage extends StatefulWidget {
 
   final double width;
 
-
-
   /// If non-null, require the image to have this height.
 
   ///
@@ -458,9 +350,7 @@ class FadeInImage extends StatefulWidget {
 
   final double height;
 
-
-
-  final bool  sdcache;
+  final bool sdcache;
 
   /// How to inscribe the image into the space allocated during layout.
 
@@ -471,8 +361,6 @@ class FadeInImage extends StatefulWidget {
   /// [paintImage].
 
   final BoxFit fit;
-
-
 
   /// How to align the image within its bounds.
 
@@ -520,13 +408,9 @@ class FadeInImage extends StatefulWidget {
 
   final AlignmentGeometry alignment;
 
-
-
   /// How to paint any portions of the layout bounds not covered by the image.
 
   final ImageRepeat repeat;
-
-
 
   /// Whether to paint the image in the direction of the [TextDirection].
 
@@ -560,24 +444,14 @@ class FadeInImage extends StatefulWidget {
 
   final bool matchTextDirection;
 
-
-
   @override
-
   State<StatefulWidget> createState() => _FadeInImageState();
-
 }
-
-
-
-
 
 /// The phases a [FadeInImage] goes through.
 
 @visibleForTesting
-
 enum FadeInImagePhase {
-
   /// The initial state.
 
   ///
@@ -590,300 +464,186 @@ enum FadeInImagePhase {
 
   start,
 
-
-
   /// Waiting for the target image to load.
 
   waiting,
-
-
 
   /// Fading out previous image.
 
   fadeOut,
 
-
-
   /// Fading in new image.
 
   fadeIn,
 
-
-
   /// Fade-in complete.
 
   completed,
-
 }
-
-
 
 typedef _ImageProviderResolverListener = void Function();
 
-
-
 class _ImageProviderResolver {
-
   _ImageProviderResolver({
-
     @required this.state,
-
     @required this.listener,
-
   });
-
-
 
   final _FadeInImageState state;
 
   final _ImageProviderResolverListener listener;
 
-
-
   FadeInImage get widget => state.widget;
-
-
 
   ImageStream _imageStream;
 
   ImageInfo _imageInfo;
 
-
-
   void resolve(ImageProvider provider) {
-
     final ImageStream oldImageStream = _imageStream;
 
-    _imageStream = provider.resolve(createLocalImageConfiguration(
+    _imageStream = provider.resolve(createLocalImageConfiguration(state.context,
+        size: widget.width != null && widget.height != null
+            ? Size(widget.width, widget.height)
+            : null));
 
-        state.context,
-
-        size: widget.width != null && widget.height != null ? Size(widget.width, widget.height) : null
-
-    ));
-
-    if(_imageStream!=null){
-
-    }
+    if (_imageStream != null) {}
 
     assert(_imageStream != null);
 
-
-
     if (_imageStream.key != oldImageStream?.key) {
-
       oldImageStream?.removeListener(_handleImageChanged);
 
       _imageStream.addListener(_handleImageChanged);
-
     }
-
   }
 
-
-
   void _handleImageChanged(ImageInfo imageInfo, bool synchronousCall) {
-
     _imageInfo = imageInfo;
 
     listener();
-
   }
-
-
 
   void stopListening() {
-
     _imageStream?.removeListener(_handleImageChanged);
-
   }
-
 }
 
-
-
-class _FadeInImageState extends State<FadeInImage> with TickerProviderStateMixin {
-
+class _FadeInImageState extends State<FadeInImage>
+    with TickerProviderStateMixin {
   _ImageProviderResolver _imageResolver;
 
   _ImageProviderResolver _placeholderResolver;
-
-
 
   AnimationController _controller;
 
   Animation<double> _animation;
 
-
-
   FadeInImagePhase _phase = FadeInImagePhase.start;
 
   FadeInImagePhase get phase => _phase;
 
-
-
   @override
-
   void initState() {
+    _imageResolver =
+        _ImageProviderResolver(state: this, listener: _updatePhase);
 
-    _imageResolver = _ImageProviderResolver(state: this, listener: _updatePhase);
-
-    _placeholderResolver = _ImageProviderResolver(state: this, listener: () {
-
-      setState(() {
-
-        // Trigger rebuild to display the placeholder image
-
-      });
-
-    });
+    _placeholderResolver = _ImageProviderResolver(
+        state: this,
+        listener: () {
+          setState(() {
+            // Trigger rebuild to display the placeholder image
+          });
+        });
 
     _controller = AnimationController(
-
       value: 1.0,
-
       vsync: this,
-
     );
 
     _controller.addListener(() {
-
       setState(() {
-
         // Trigger rebuild to update opacity value.
-
       });
-
     });
 
     _controller.addStatusListener((AnimationStatus status) {
-
       _updatePhase();
-
     });
 
     super.initState();
-
   }
 
-
-
   @override
-
   void didChangeDependencies() {
-
     _resolveImage();
 
     super.didChangeDependencies();
-
   }
 
-
-
   @override
-
   void didUpdateWidget(FadeInImage oldWidget) {
-
     super.didUpdateWidget(oldWidget);
 
-    if (widget.image != oldWidget.image || widget.placeholder != oldWidget.placeholder)
-
-      _resolveImage();
-
+    if (widget.image != oldWidget.image ||
+        widget.placeholder != oldWidget.placeholder) _resolveImage();
   }
 
-
-
   @override
-
   void reassemble() {
-
     _resolveImage(); // in case the image cache was flushed
 
     super.reassemble();
-
   }
 
-
-
   void _resolveImage() {
-
     _imageResolver.resolve(widget.image);
-
-
 
     // No need to resolve the placeholder if we are past the placeholder stage.
 
-    if (_isShowingPlaceholder)
+    if (_isShowingPlaceholder) _placeholderResolver.resolve(widget.placeholder);
 
-      _placeholderResolver.resolve(widget.placeholder);
-
-
-
-    if (_phase == FadeInImagePhase.start)
-
-      _updatePhase();
-
+    if (_phase == FadeInImagePhase.start) _updatePhase();
   }
 
-
-
   void _updatePhase() {
-
     setState(() {
-
       switch (_phase) {
-
         case FadeInImagePhase.start:
-
           if (_imageResolver._imageInfo != null)
-
             _phase = FadeInImagePhase.completed;
-
           else
-
             _phase = FadeInImagePhase.waiting;
 
           break;
 
         case FadeInImagePhase.waiting:
-
           if (_imageResolver._imageInfo != null) {
-
             // Received image data. Begin placeholder fade-out.
 
             _controller.duration = widget.fadeOutDuration;
 
             _animation = CurvedAnimation(
-
               parent: _controller,
-
               curve: widget.fadeOutCurve,
-
             );
 
             _phase = FadeInImagePhase.fadeOut;
 
             _controller.reverse(from: 1.0);
-
           }
 
           break;
 
         case FadeInImagePhase.fadeOut:
-
           if (_controller.status == AnimationStatus.dismissed) {
-
             // Done fading out placeholder. Begin target image fade-in.
 
             _controller.duration = widget.fadeInDuration;
 
             _animation = CurvedAnimation(
-
               parent: _controller,
-
               curve: widget.fadeInCurve,
-
             );
 
             _phase = FadeInImagePhase.fadeIn;
@@ -891,41 +651,30 @@ class _FadeInImageState extends State<FadeInImage> with TickerProviderStateMixin
             _placeholderResolver.stopListening();
 
             _controller.forward(from: 0.0);
-
           }
 
           break;
 
         case FadeInImagePhase.fadeIn:
-
           if (_controller.status == AnimationStatus.completed) {
-
             // Done finding in new image.
 
             _phase = FadeInImagePhase.completed;
-
           }
 
           break;
 
         case FadeInImagePhase.completed:
 
-        // Nothing to do.
+          // Nothing to do.
 
           break;
-
       }
-
     });
-
   }
 
-
-
   @override
-
   void dispose() {
-
     _imageResolver.stopListening();
 
     _placeholderResolver.stopListening();
@@ -933,103 +682,66 @@ class _FadeInImageState extends State<FadeInImage> with TickerProviderStateMixin
     _controller.dispose();
 
     super.dispose();
-
   }
 
-
-
   bool get _isShowingPlaceholder {
-
     assert(_phase != null);
 
     switch (_phase) {
-
       case FadeInImagePhase.start:
 
       case FadeInImagePhase.waiting:
 
       case FadeInImagePhase.fadeOut:
-
         return true;
 
       case FadeInImagePhase.fadeIn:
 
       case FadeInImagePhase.completed:
-
         return false;
-
     }
 
-
-
     return null;
-
   }
-
-
 
   ImageInfo get _imageInfo {
-
     return _isShowingPlaceholder
-
         ? _placeholderResolver._imageInfo
-
         : _imageResolver._imageInfo;
-
   }
 
-
-
   @override
-
   Widget build(BuildContext context) {
-
     assert(_phase != FadeInImagePhase.start);
 
     final ImageInfo imageInfo = _imageInfo;
 
     return RawImage(
-
       image: imageInfo?.image,
-
       width: widget.width,
-
       height: widget.height,
-
       scale: imageInfo?.scale ?? 1.0,
-
       color: Color.fromRGBO(255, 255, 255, _animation?.value ?? 1.0),
-
       colorBlendMode: BlendMode.modulate,
-
       fit: widget.fit,
-
       alignment: widget.alignment,
-
       repeat: widget.repeat,
-
       matchTextDirection: widget.matchTextDirection,
-
     );
-
   }
 
-
-
   @override
-
   void debugFillProperties(DiagnosticPropertiesBuilder description) {
-
     super.debugFillProperties(description);
 
     description.add(EnumProperty<FadeInImagePhase>('phase', _phase));
 
     description.add(DiagnosticsProperty<ImageInfo>('pixels', _imageInfo));
 
-    description.add(DiagnosticsProperty<ImageStream>('image stream', _imageResolver._imageStream));
+    description.add(DiagnosticsProperty<ImageStream>(
+        'image stream', _imageResolver._imageStream));
 
-    description.add(DiagnosticsProperty<ImageStream>('placeholder stream', _placeholderResolver._imageStream));
-
+    description.add(DiagnosticsProperty<ImageStream>(
+        'placeholder stream', _placeholderResolver._imageStream));
   }
-
 }

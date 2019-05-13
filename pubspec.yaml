@@ -50,16 +50,26 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - pic/images/wenshan_wel_logon.jpg
-    - pic/images/avatar.png
-    - pic/images/ww_default_avatar.png
-    - pic/images/ww_main_me_qrcode.png
-    - pic/images/ww_main_me_gallary.png
-    - pic/images/ww_main_me_safe.png
-    - pic/images/ww_main_me_wallet.png
-    - pic/images/ww_main_me_card.png
-    - pic/images/ww_main_me_setting.png
-    - pic/images/money-gold.png
+    - assets/images/wenshan_wel_logon.jpg
+    - assets/images/avatar.png
+    - assets/images/ww_default_avatar.png
+    - assets/images/ww_main_me_qrcode.png
+    - assets/images/ww_main_me_gallary.png
+    - assets/images/ww_main_me_safe.png
+    - assets/images/ww_main_me_wallet.png
+    - assets/images/ww_main_me_card.png
+    - assets/images/ww_main_me_setting.png
+    - assets/images/money-gold.png
+    - assets/images/backGround.jpg
+    - assets/images/mars.png
+    - assets/images/neptune.png
+    - assets/images/moon.png
+    - assets/images/earth.png
+    - assets/images/mercury.png
+    - assets/images/ic_distance.png
+    - assets/images/ic_gravity.png
+    - assets/images/Sign-icon.png
+    - assets/images/VipLeve.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
@@ -90,3 +100,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600

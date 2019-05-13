@@ -258,6 +258,7 @@ class _LoginPageState extends State<LoginPage> {
     LoginInfo.faceImageBig = user.faceImageBig;
     LoginInfo.isLogin=true;
     LoginInfo.loginTime = new DateTime.now();
+    LoginInfo.hasInit=false;
     _goHomePage();
   }
   void fail2(RespObj data){

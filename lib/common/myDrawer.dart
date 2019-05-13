@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
     Key key,
@@ -22,7 +23,10 @@ class MyDrawer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: ClipOval(
-                      child:Image.asset("pic/images/avatar.png", width: 80,),
+                      child: Image.asset(
+                        "assets/images/avatar.png",
+                        width: 80,
+                      ),
                     ),
                   ),
                   Text(
