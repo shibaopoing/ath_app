@@ -1,4 +1,11 @@
+import 'dart:convert';
+
+import 'package:ath_app/common/http/api/api.dart';
+import 'package:ath_app/common/http/httpUtils.dart';
+import 'package:ath_app/common/http/response/respObj.dart';
+import 'package:ath_app/common/messageAlter.dart';
 import 'package:ath_app/common/model/logininfo.dart';
+import 'package:ath_app/common/model/userInfo.dart';
 import 'package:flutter/material.dart';
 
 class EditUserInfoPage extends StatefulWidget {
@@ -10,10 +17,19 @@ class EditUserInfoPage extends StatefulWidget {
 class _EditUserInfoPageState extends State<EditUserInfoPage> {
   var inputText;
   var sex;
-  TextEditingController _selectionController = new TextEditingController();
+  TextEditingController _userNameController = new TextEditingController();
+  static GlobalKey<ScaffoldState> _globalKey= new GlobalKey();
+  String _userEmail="";
+  @override
+  void initState() {
+    super.initState();
+    _userNameController.text=LoginInfo.userName;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: _globalKey,
       appBar: new AppBar(
           title: new Text(
             '个人信息',
@@ -70,7 +86,15 @@ class _EditUserInfoPageState extends State<EditUserInfoPage> {
                   new Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: new TextField(
-                      controller: TextEditingController(text: LoginInfo.userName),
+                      controller: _userNameController,
+/*                      onChanged: (str) {
+                        setState(() {
+                          if(_userName.isNotEmpty){
+                            _userName="";
+                          }
+                          _userName = str;
+                        });
+                      },*/
                       decoration: InputDecoration(
                         //icon: Icon(Icons.person),
                         labelText: "昵称",
@@ -81,6 +105,14 @@ class _EditUserInfoPageState extends State<EditUserInfoPage> {
                     padding: const EdgeInsets.only(top: 5),
                     child: new TextField(
                       controller: TextEditingController(text: LoginInfo.userEmail),
+                      onChanged: (str) {
+                        setState(() {
+                          if(_userEmail.isNotEmpty){
+                            _userEmail="";
+                          }
+                          _userEmail = str;
+                        });
+                      },
                       decoration: InputDecoration(
                         //icon: Icon(Icons.person),
                         labelText: "邮箱",
@@ -121,7 +153,26 @@ class _EditUserInfoPageState extends State<EditUserInfoPage> {
   /// 保存按钮点击的回调
   ///
   _saveUserInfo() {
+    String userName =_userNameController.text;
+    UserInfo userInfo = new UserInfo.empty();
+    userInfo.id = LoginInfo.id;
+    userInfo.userName='$userName';
+    userInfo.userEmail='$_userEmail';
+    print('userName:$userName , assword:$_userEmail');
+    // json.
+    HttpUtils.post(Api.SET_NICK_NAME,ssucce,context,params: json.decode(json.encode(userInfo)),errorCallBack: fail2);
+  }
+  void ssucce(RespObj data){
+    UserInfo user = UserInfo.fromJson(data.data);
+    // Navigator.of(context).pop();
+    LoginInfo.userName = user.userName;
+    LoginInfo.userEmail = user.userEmail;
+    LoginInfo.loginTime = new DateTime.now();
+    LoginInfo.hasInit=false;
     Navigator.pop(context, '$inputText');
+  }
+  void fail2(RespObj data){
+      Alter.show(context, data.message);
   }
   ///
   /// 输入内容改变之后

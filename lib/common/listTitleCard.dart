@@ -21,12 +21,24 @@ class ListTitleCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               new Padding(
-                padding: EdgeInsets.only(left: 15),
+                padding: EdgeInsets.fromLTRB(15,10,0,0),
                 child:new Text(title,
                   style: Style.commonTextStyle,
                 ),
               ),
-              new Icon(Icons.keyboard_arrow_right,color: Style.iconColor,),
+              new Padding(
+                padding: EdgeInsets.only(right:10,top: 10),
+                child:new Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    new Text("更多",
+                      style: Style.smallTextStyle,
+                      textAlign: TextAlign.end,
+                    ),
+                    new Icon(Icons.keyboard_arrow_right,color: Style.iconColor,size:15,),
+                  ],
+                )
+              ),
             ],
           ),
          // new Separator(),

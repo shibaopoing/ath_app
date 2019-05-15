@@ -141,15 +141,11 @@ class _MinePageState extends State<MinePage> {
             },
             child: new Text(LoginInfo.userName.isNotEmpty?LoginInfo.userName:"点击登录", style: Style.titleTextStyle),
           ),
-          new Container(
-              child: new Center(
-
-              ),
-              height: 10.0
-          ),
+          new Container(child: new Center(), height: 10.0),
           new Text(LoginInfo.userCode, style: Style.commonTextStyle),
-
+          new Container(child: new Center(), height: 3.0),
           new Separator(),
+          new Container(child: new Center(), height: 3.0),
           new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -191,18 +187,19 @@ class _MinePageState extends State<MinePage> {
            child:
            LoginInfo.faceImage.isNotEmpty ? Image.network(Api.ImageUrl+LoginInfo.faceImage,width: 92,height: 92,fit: BoxFit.cover,) : Image.asset("assets/images/avatar.png", width: 92,height: 92,fit: BoxFit.cover),
          ),
-       ),
+        ),
       )
     );
   }
   Container _builderCard(){
     return new Container(
       child: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           new Container(
+           // color: Colors.greenAccent,
             child: new Image.asset("assets/images/VipLeve.png",width: 30,height: 30,),
-            width: (MediaQuery.of(context).size.width-80)/5,
+            width: (MediaQuery.of(context).size.width-80)/8,
             decoration: new BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: new BorderRadius.circular(50.0),
@@ -216,12 +213,13 @@ class _MinePageState extends State<MinePage> {
             ),
           ),
           new Container(
-           child:_builderCardContent(),
-            width: (MediaQuery.of(context).size.width-80)/2,
+           // color: Colors.deepOrange,
+            child:_builderCardContent(),
+            width: (MediaQuery.of(context).size.width)-150,
           ),
           new Container(
             child: new Image.asset("assets/images/Sign-icon.png",width: 30,height: 30,),
-            width: (MediaQuery.of(context).size.width-80)/5,
+            width: (MediaQuery.of(context).size.width-80)/8,
             decoration: new BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: new BorderRadius.circular(50.0),
@@ -233,7 +231,7 @@ class _MinePageState extends State<MinePage> {
                 ),
               ],
             ),
-    )
+          )
         ],
       ),
       height:  154.0,
@@ -327,12 +325,23 @@ class _MinePageState extends State<MinePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   new Padding(
-                    padding: EdgeInsets.only(left: 15),
+                    padding: EdgeInsets.only(left: 15,top: 10),
                     child:new Text("我的功能",
                       style: Style.commonTextStyle,
                     ),
                   ),
-                  new Icon(Icons.keyboard_arrow_right,color: Style.iconColor,),
+                  new Padding(
+                      padding: EdgeInsets.only(right:10,top: 10),
+                      child:new Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          new Text("更多",
+                            style: Style.smallTextStyle,
+                          ),
+                          new Icon(Icons.keyboard_arrow_right,color: Style.iconColor,size:15,),
+                        ],
+                      )
+                  ),
                 ],
               ),
             new Row(

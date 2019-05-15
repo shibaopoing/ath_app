@@ -38,6 +38,15 @@ class _SettingPageState extends State<SettingPage> {
                 title: const Text('个人偏好'),
               ),
               new Container(
+                margin: new EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
+                height: 1.0,
+                color: const Color(0xffebebeb),
+              ),
+              ListTile(
+                leading: const Icon(Icons.supervisor_account,color: Colors.blue),
+                title: const Text('切换账号'),
+              ),
+              new Container(
                 height: 20.0,
                 color: const Color(0xffebebeb),
               ),
