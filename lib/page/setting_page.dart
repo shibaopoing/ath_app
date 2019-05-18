@@ -1,4 +1,8 @@
 import 'package:ath_app/common/model/logininfo.dart';
+import 'package:ath_app/common/utils/NavigatorRouterUtils.dart';
+import 'package:ath_app/page/account_page.dart';
+import 'package:ath_app/page/login_page.dart';
+import 'package:ath_app/page/mine_page.dart';
 import 'package:flutter/material.dart';
 
 class SettingPage extends StatefulWidget {
@@ -25,6 +29,9 @@ class _SettingPageState extends State<SettingPage> {
             //padding: EdgeInsets.symmetric(horizontal: 22.0),
             children: <Widget>[
               ListTile(
+                onTap: (){
+                  _pageToAccountPage();
+                },
                 leading: const Icon(Icons.account_circle,color: Colors.blue,),
                 title: const Text('账户与安全'),
               ),
@@ -90,6 +97,9 @@ class _SettingPageState extends State<SettingPage> {
         LoginInfo.userPhone = "";
         LoginInfo.isLogin=false;
       });
+      //先关掉该页面，
+      Navigator.of(context).pop();
+      //NavigatorRouterUtils.pushToPage(context, MinePage());
     }
   }
   List<DropdownMenuItem> getSexData() {
@@ -106,7 +116,9 @@ class _SettingPageState extends State<SettingPage> {
     items.add(dropdownMenuItem2);
     return items;
   }
-
+  _pageToAccountPage(){
+    NavigatorRouterUtils.pushToPage(context, AccountPage());
+  }
   ///
   /// 保存按钮点击的回调
   ///

@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage>{
     super.initState();
     // 创建Controller
     _viewList = List();
-    _viewList..add(MainPage())..add(ChipDemo())..add(MinePage())..add( MinePage());
+    _viewList..add(MainPage())..add( new ChipDemo())..add(MinePage())..add( MinePage());
     _itemsColor = List();
     _itemsColor..add(selectedColor)..add(normalColor)..add(normalColor)..add(normalColor);
   }

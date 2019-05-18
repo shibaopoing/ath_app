@@ -1,3 +1,4 @@
+import 'package:ath_app/page/searchBarDelegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ath_app/common/myDrawer.dart';
@@ -10,7 +11,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
   static GlobalKey<ScaffoldState> _globalKey= new GlobalKey();
   TabController _tabController; //需要定义一个Controller
-  List tabs = ["电影", "电视剧", "动漫"];
+  List tabs = ["电影", "电视剧","戏曲","动漫","音乐","短视频"];
   @override
   void initState() {
     super.initState();
@@ -28,10 +29,12 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return new Scaffold(
       key: _globalKey , //设置key
-      appBar: new AppBar(
+      appBar:
+      new AppBar(
         title:TabBar(//生成Tab菜单
             controller: _tabController,
-            tabs: tabs.map((e) => Tab(text: e)).toList()
+            isScrollable: true,
+            tabs: tabs.map((e) => Tab(text: e)).toList(),
         ),
         leading: Builder(builder: (context) {
           return IconButton(
@@ -43,6 +46,16 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             },
           );
         }),
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.search),
+            tooltip: '搜索',
+            onPressed: (){
+             // NavigatorUtil.intentToPage(context, new SearchPage(), pageName: "SearchPage");
+              showSearch(context: context, delegate: SearchBarDelegate());
+            }
+        )
+        ],
       ),
       drawer: new MyDrawer(), //抽屉
       body:TabBarView(
