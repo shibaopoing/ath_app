@@ -233,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
               userInfo.userPhone='$_phoneNum';
               userInfo.userPwd='$_password';
               print('email:$_phoneNum , assword:$_password');
-             // json.
+              // json.
               HttpUtils.post(Api.USER_LOGIN,ssucce,context,params: json.decode(json.encode(userInfo)),errorCallBack: fail2);
             }
           },
@@ -259,7 +259,11 @@ class _LoginPageState extends State<LoginPage> {
     LoginInfo.isLogin=true;
     LoginInfo.loginTime = new DateTime.now();
     LoginInfo.hasInit=false;
-    _goHomePage();
+    if(LoginInfo.goHome){
+      _goHomePage();
+    }else{
+      Navigator.of(context).pop();
+    }
   }
   void fail2(RespObj data){
     if(data.code=="U001"){

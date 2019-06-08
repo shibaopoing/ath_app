@@ -7,6 +7,9 @@ class Api {
   static const String SEND_SMS_CODE = "sendSmsCode";
   static const String SET_FACE_IMAGE = "setFaceImage";
   static const String SET_NICK_NAME = "setNickname";
+  static const String SET_PHONE_NUM = "setPhoneNum";
+  static const String CHECK_PASSWORD = "checkPassWord";
+  static const String SET_PASSWORD = "setPassWord";
   //登录,注册;
   static const String USER_LOGIN = "login";
   static const String REGISTER = "userRegister";

@@ -1,4 +1,7 @@
 import 'package:ath_app/common/model/logininfo.dart';
+import 'package:ath_app/common/utils/NavigatorRouterUtils.dart';
+import 'package:ath_app/page/passwordEdit_page.dart';
+import 'package:ath_app/page/phoneNum_page.dart';
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatefulWidget {
@@ -39,6 +42,9 @@ class _AccountPageState extends State<AccountPage> {
                   subtitle: Text(LoginInfo.userPhone),
                   dense: true,
                   trailing: new Icon(Icons.keyboard_arrow_right),
+                  onTap: (){
+                    NavigatorRouterUtils.pushToPage(context, PhoneNumPage());
+                  },
                 ),
                 new Container(
                   margin: new EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
@@ -49,6 +55,15 @@ class _AccountPageState extends State<AccountPage> {
                   leading: const Icon(Icons.lock_outline,color: Colors.blue),
                   title: const Text('密码'),
                   trailing: new Icon(Icons.keyboard_arrow_right),
+                  onTap: (){
+                    Navigator.of(context).push(
+                        new MaterialPageRoute(
+                          builder: (context){
+                            return PasswordEdit();
+                          },
+                        )
+                    );
+                  },
                 ),
                 new Container(
                   margin: new EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
