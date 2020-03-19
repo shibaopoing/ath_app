@@ -1,3 +1,6 @@
+import 'package:ath_app/common/movieCard.dart';
+import 'package:ath_app/page/ITabPage/ITab_page.dart';
+import 'package:ath_app/page/movie_page.dart';
 import 'package:ath_app/page/searchBarDelegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -11,7 +14,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
   static GlobalKey<ScaffoldState> _globalKey= new GlobalKey();
   TabController _tabController; //需要定义一个Controller
-  List tabs = ["电影", "电视剧","戏曲","动漫","音乐","短视频"];
+  static MoviePage  moviePage = new MoviePage("电影",0);
+  List tabs1 = ["电影", "电视剧","戏曲","动漫","音乐","短视频"];
+  List<MoviePage> tabs = [moviePage];
   @override
   void initState() {
     super.initState();
@@ -34,7 +39,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         title:TabBar(//生成Tab菜单
             controller: _tabController,
             isScrollable: true,
-            tabs: tabs.map((e) => Tab(text: e)).toList(),
+            tabs: tabs.map((e) => Tab(text: e.tabName)).toList(),
         ),
         leading: Builder(builder: (context) {
           return IconButton(
@@ -62,11 +67,17 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         controller: _tabController,
         children: tabs.map((e) { //创建3个Tab页
           return Container(
-            alignment: Alignment.center,
-            child: Text(e, textScaleFactor: 5),
+            alignment: Alignment.topCenter,
+            child: Stack(
+              children: <Widget>[
+                tabs[e.tabIndex],
+              ],
+            )
+
           );
         }).toList(),
       ),
     );
   }
+
 }

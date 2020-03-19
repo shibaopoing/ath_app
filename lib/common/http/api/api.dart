@@ -1,7 +1,7 @@
 class Api {
   //首页banner
-  //static const String BaseUrl = "http://47.102.217.76:8010/";
-  static const   String BaseUrl = "http://192.168.1.3:8010/";
+  static const String BaseUrl = "http://47.102.217.76:8010/";
+  //static const   String BaseUrl = "http://192.168.1.3:8010/";
   static const String ImageUrl = "http://47.102.217.76:88/ath/";
   static const String GET_USER_INFO = "getUserInfo";
   static const String SEND_SMS_CODE = "sendSmsCode";
